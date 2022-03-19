@@ -51,22 +51,18 @@ document.querySelector(".check").addEventListener("click", function () {
 
     // When guess is outside of range
   } else if (guess > 20 || guess < 1) {
+    score();
     document.querySelector(".message").textContent = `Guess between 1 and 20`;
 
-    // When guess is too high
-  } else if (guess > secretNumber) {
-    document.querySelector(".message").textContent = `📈 Too high!`;
-
-    // When guess is too low
-  } else if (guess < secretNumber) {
-    document.querySelector(".message").textContent = `📉 Too low!`;
-  }
-
-  if (guess != secretNumber) {
+    // When guess is wrong
+  } else {
     score();
+    document.querySelector(".message").textContent =
+      guess > secretNumber ? `📈 Too high!` : `📉 Too low!`;
   }
 });
 
+// Reset button
 document.querySelector(".again").addEventListener("click", function () {
   secretNumber = Math.trunc(Math.random() * 20) + 1;
   document.querySelector(".message").textContent = "Start guessing...";
